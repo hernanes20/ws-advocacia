@@ -38,7 +38,7 @@ export async function PUT(req: Request) {
     try {
       await transporter.sendMail(mailOptions);
     } catch (err) {
-      // Não bloqueia o fluxo se o e-mail falhar, mas retorna aviso
+  
       return new Response(JSON.stringify({ success: true, warning: 'Resposta salva, mas não foi possível enviar o e-mail.' }), { status: 200 });
     }
 

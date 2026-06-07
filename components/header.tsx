@@ -11,7 +11,8 @@ export default function Header() {
     { label: 'Início', href: 'inicio' },
     { label: 'Sobre', href: 'sobre' },
     { label: 'Serviços', href: 'servicos' },
-    { label: 'Newsletter', href: 'newsletter' },
+    { label: 'Galeria', href: 'galeria' },
+    { label: 'Localização', href: 'localizacao' },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -62,7 +63,7 @@ export default function Header() {
         <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between">
           <div className="flex items-center">
             <img
-              src="/logowill.png"
+              src="/logowill.PNG"
               alt="Logo"
               className="h-14 w-auto"
               style={{ maxHeight: '56px', width: 'auto' }}
@@ -114,10 +115,7 @@ export default function Header() {
                   <button
                     key={item.label}
                     className="text-slate-700 hover:text-slate-900 text-left transition-colors"
-                    onClick={() => {
-                    scrollToSection(item.href);
-                      setIsMenuOpen(false);
-                    }}
+                    onClick={() => scrollToSection(item.href)}
                   >
                     {item.label}
                   </button>

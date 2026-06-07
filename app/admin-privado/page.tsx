@@ -1,10 +1,9 @@
 "use client";
 import { useState } from "react";
 import NewsAdminPanel from "@/components/news-admin-panel";
-import NewsletterAdminPanel from "@/components/newsletter-admin-panel";
 import ContactMessagesPanel from "@/components/contact-messages-panel";
 
-export default function AdminPage() {
+export default function AdminPrivadoPage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -59,7 +58,6 @@ export default function AdminPage() {
   return (
     <>
       <NewsAdminPanel />
-      <NewsletterAdminPanel />
       <ContactMessagesPanel />
     </>
   );

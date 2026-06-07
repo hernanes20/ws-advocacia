@@ -8,6 +8,7 @@ import path from "path";
 export async function POST(req: Request) {
   try {
     const { title, text, image } = await req.json();
+    
     // Carrega os inscritos
     const newsletterPath = path.join(process.cwd(), "data", "newsletter.json");
     let emails: string[] = [];
@@ -20,13 +21,16 @@ export async function POST(req: Request) {
         emails = [];
       }
     }
+    
     if (emails.length === 0) {
       return NextResponse.json({ error: "Nenhum inscrito encontrado." }, { status: 400 });
     }
+    
     // Verifica variáveis de ambiente
     if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
       return NextResponse.json({ error: "Configuração SMTP ausente. Verifique .env.local" }, { status: 500 });
     }
+    
     // Configura o transporter
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -37,8 +41,10 @@ export async function POST(req: Request) {
         pass: process.env.SMTP_PASS,
       },
     });
+    
     // Monta o conteúdo do e-mail
     const html = `<h2>${title}</h2><p>${text}</p>${image ? `<img src='${image}' style='max-width:400px;' />` : ""}`;
+    
     // Envia para todos e registra status
     const results: { email: string; success: boolean; error?: string }[] = [];
     for (const email of emails) {
@@ -54,8 +60,53 @@ export async function POST(req: Request) {
         results.push({ email, success: false, error: err.message || String(err) });
       }
     }
-    return NextResponse.json({ ok: true, results });
+    
+    // Salva a newsletter enviada em um arquivo
+    const newslettersSentPath = path.join(process.cwd(), "data", "newsletters-sent.json");
+    let newslettersSent: any[] = [];
+    
+    if (fs.existsSync(newslettersSentPath)) {
+      try {
+        const raw = fs.readFileSync(newslettersSentPath, "utf-8");
+        newslettersSent = JSON.parse(raw);
+        if (!Array.isArray(newslettersSent)) newslettersSent = [];
+      } catch {
+        newslettersSent = [];
+      }
+    }
+    
+    // Adiciona a nova newsletter
+    const newNewsletter = {
+      id: Date.now().toString(),
+      title,
+      text,
+      image: image || null,
+      sentAt: new Date().toISOString(),
+      recipientCount: emails.length,
+    };
+    
+    newslettersSent.unshift(newNewsletter); // Adiciona no início
+    fs.writeFileSync(newslettersSentPath, JSON.stringify(newslettersSent, null, 2));
+    
+    return NextResponse.json({ ok: true, results, newsletter: newNewsletter });
   } catch (err: any) {
     return NextResponse.json({ error: err.message || String(err) }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+    const newslettersSentPath = path.join(process.cwd(), "data", "newsletters-sent.json");
+    
+    if (!fs.existsSync(newslettersSentPath)) {
+      return NextResponse.json([]);
+    }
+    
+    const raw = fs.readFileSync(newslettersSentPath, "utf-8");
+    const newsletters = JSON.parse(raw);
+    
+    return NextResponse.json(newsletters);
+  } catch {
+    return NextResponse.json([]);
   }
 }

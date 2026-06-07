@@ -8,12 +8,12 @@
   "description": "Painel administrativo Ws Advocacia",
   "icons": [
     {
-      "src": "/wpplogo.png",
+      "src": "/logowill.PNG",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/wpplogo.png",
+      "src": "/logowill.PNG",
       "sizes": "512x512",
       "type": "image/png"
     }

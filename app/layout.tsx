@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import CookieBanner from "@/components/cookie-banner"
+import SocialFloatButtons from "@/components/SocialFloatButtons"
 
 export const metadata: Metadata = {
   title: 'Ws Advocacia',
@@ -28,6 +29,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <SocialFloatButtons />
         <CookieBanner />
       </body>
     </html>
