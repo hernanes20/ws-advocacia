@@ -50,12 +50,22 @@ export default function Hero() {
           </div>
 
           <div className="relative">
-            <img
-              src="/fotowill.jpeg"
-              alt="Advogado profissional"
-              className="rounded-lg shadow-2xl object-cover w-full h-[28rem] sm:h-[32rem] bg-slate-200"
-              onError={e => { e.currentTarget.src = "/placeholder.jpg"; }}
-            />
+            <div className="relative overflow-hidden rounded-lg">
+              <img
+                src="/fotowill.jpeg"
+                alt="Advogado profissional"
+                className="object-cover w-full h-[28rem] sm:h-[32rem] bg-slate-200"
+                onError={e => { e.currentTarget.src = "/placeholder.jpg"; }}
+              />
+              {/* Overlay de desbotamento nas bordas */}
+              <div 
+                className="absolute inset-0 rounded-lg"
+                style={{
+                  background: 'radial-gradient(ellipse 100% 100% at 50% 50%, transparent 0%, transparent 60%, rgba(15, 23, 42, 0.5) 100%)',
+                  pointerEvents: 'none'
+                }}
+              />
+            </div>
             <div className="absolute -bottom-6 -left-6 bg-blue-600 text-white p-6 rounded-lg shadow-xl">
               <div className="text-2xl font-bold">100%</div>
               <div className="text-sm">Taxa de Sucesso</div>
