@@ -4,15 +4,17 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Scale, Phone, Mail } from "lucide-react"
 import { Instagram } from "lucide-react"
+import Link from "next/link"
 
 export default function Header() {
   // Definição dos itens de navegação
   const navItems = [
-    { label: 'Início', href: 'inicio' },
-    { label: 'Sobre', href: 'sobre' },
-    { label: 'Serviços', href: 'servicos' },
-    { label: 'Galeria', href: 'galeria' },
-    { label: 'Localização', href: 'localizacao' },
+    { label: 'Início', href: 'inicio', external: false },
+    { label: 'Sobre', href: 'sobre', external: false },
+    { label: 'Serviços', href: 'servicos', external: false },
+    { label: 'Informativos', href: '/informativos', external: true },
+    { label: 'Galeria', href: 'galeria', external: false },
+    { label: 'Localização', href: 'localizacao', external: false },
   ];
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -71,13 +73,23 @@ export default function Header() {
           </div>
           <nav className="hidden md:flex gap-2 ml-8">
             {navItems.map((item) => (
-              <button
-                key={item.label}
-                className="px-4 py-2 text-gray-800 font-medium hover:bg-blue-50 rounded transition-colors"
-                onClick={() => scrollToSection(item.href)}
-              >
-                {item.label}
-              </button>
+              item.external ? (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="px-4 py-2 text-gray-800 font-medium hover:bg-blue-50 rounded transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <button
+                  key={item.label}
+                  className="px-4 py-2 text-gray-800 font-medium hover:bg-blue-50 rounded transition-colors"
+                  onClick={() => scrollToSection(item.href)}
+                >
+                  {item.label}
+                </button>
+              )
             ))}
           </nav>
           <div className="hidden md:block ml-2">
@@ -112,13 +124,27 @@ export default function Header() {
               </button>
               <nav className="flex flex-col gap-4">
                 {navItems.map((item) => (
-                  <button
-                    key={item.label}
-                    className="text-slate-700 hover:text-slate-900 text-left transition-colors"
-                    onClick={() => scrollToSection(item.href)}
-                  >
-                    {item.label}
-                  </button>
+                  item.external ? (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className="text-slate-700 hover:text-slate-900 text-left transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <button
+                      key={item.label}
+                      className="text-slate-700 hover:text-slate-900 text-left transition-colors"
+                      onClick={() => {
+                        scrollToSection(item.href)
+                        setIsMenuOpen(false)
+                      }}
+                    >
+                      {item.label}
+                    </button>
+                  )
                 ))}
               </nav>
             </div>

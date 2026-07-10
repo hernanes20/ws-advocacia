@@ -1,3 +1,4 @@
+
 "use client"
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
@@ -23,3 +24,4 @@ export default function ScrollReveal({ children, delay = 0 }: ScrollRevealProps)
     </motion.div>
   );
 }
+

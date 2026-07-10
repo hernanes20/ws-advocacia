@@ -44,13 +44,7 @@ export default function About() {
                     <p className="text-slate-600">Comunicação clara sobre processos e custos</p>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-6 w-6 text-green-600 mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold text-slate-900">Resultados Comprovados</h4>
-                    <p className="text-slate-600">Histórico de sucesso em diversas áreas do direito</p>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>

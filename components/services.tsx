@@ -93,13 +93,7 @@ export default function Services() {
             ))}
           </div>
 
-          {/* CTA Section */}
-          <div className="mt-16 text-center">
-            <p className="text-slate-300 mb-6">Pronto para começar? Entre em contato conosco hoje.</p>
-            <Button className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-6 text-lg hover:shadow-xl hover:scale-105 transition-all duration-300 hover:from-blue-600 hover:to-blue-700">
-              Agendar Consulta Gratuita
-            </Button>
-          </div>
+          {/* CTA Section removed as requested */}
         </div>
       </ScrollReveal>
     </section>

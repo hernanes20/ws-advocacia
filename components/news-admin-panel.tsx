@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 
@@ -39,16 +40,29 @@ export default function NewsAdminPanel() {
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
-      const uploadRes = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-      if (uploadRes.ok) {
-        const data = await uploadRes.json();
-        imageUrl = data.url || imageUrl;
-        setImage(imageUrl);
-      } else {
-        setError("Erro ao fazer upload da imagem.");
+      try {
+        const uploadRes = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+        if (uploadRes.ok) {
+          const data = await uploadRes.json();
+          imageUrl = data.url || imageUrl;
+          setImage(imageUrl);
+        } else {
+          let text = "Erro ao fazer upload da imagem.";
+          try {
+            const err = await uploadRes.json();
+            text = err?.error || err?.message || text;
+          } catch {
+            text = await uploadRes.text().catch(() => text);
+          }
+          setError(text);
+          setLoading(false);
+          return;
+        }
+      } catch (err) {
+        setError(String(err));
         setLoading(false);
         return;
       }
@@ -170,17 +184,28 @@ function NewsEditItem({ item, onUpdate }: { item: News; onUpdate: () => void }) 
     setError("");
     const formData = new FormData();
     formData.append("file", file);
-    const uploadRes = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    });
-    if (uploadRes.ok) {
-      const data = await uploadRes.json();
-      setImage(data.url || image);
-      setFile(null);
-      if (fileInputRef.current) fileInputRef.current.value = "";
-    } else {
-      setError("Erro ao fazer upload da imagem.");
+    try {
+      const uploadRes = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      if (uploadRes.ok) {
+        const data = await uploadRes.json();
+        setImage(data.url || image);
+        setFile(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+      } else {
+        let text = "Erro ao fazer upload da imagem.";
+        try {
+          const err = await uploadRes.json();
+          text = err?.error || err?.message || text;
+        } catch {
+          text = await uploadRes.text().catch(() => text);
+        }
+        setError(text);
+      }
+    } catch (err) {
+      setError(String(err));
     }
     setLoading(false);
   };

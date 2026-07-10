@@ -9,6 +9,7 @@ import Location from "@/components/location"
 import Contact from "@/components/contact"
 import GaleriaSection from "@/components/galeria-section"
 import Footer from "@/components/footer"
+import { Reviews } from "@/components/reviews"
 import { useState } from "react";
 
 
@@ -20,6 +21,7 @@ export default function HomePage() {
       <About />
       <Services />
       <GaleriaSection />
+      <Reviews />
       <Contact />
       <Location />
       <Footer />

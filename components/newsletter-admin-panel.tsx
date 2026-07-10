@@ -48,16 +48,29 @@ export default function NewsletterAdminPanel() {
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
-      const uploadRes = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-      if (uploadRes.ok) {
-        const data = await uploadRes.json();
-        imageUrl = data.url || imageUrl;
-        setImage(imageUrl);
-      } else {
-        setError("Erro ao fazer upload da imagem.");
+      try {
+        const uploadRes = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+        if (uploadRes.ok) {
+          const data = await uploadRes.json();
+          imageUrl = data.url || imageUrl;
+          setImage(imageUrl);
+        } else {
+          let text = "Erro ao fazer upload da imagem.";
+          try {
+            const err = await uploadRes.json();
+            text = err?.error || err?.message || text;
+          } catch {
+            text = await uploadRes.text().catch(() => text);
+          }
+          setError(text);
+          setLoading(false);
+          return;
+        }
+      } catch (err) {
+        setError(String(err));
         setLoading(false);
         return;
       }

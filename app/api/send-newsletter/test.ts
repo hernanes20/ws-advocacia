@@ -1,3 +1,4 @@
+
 // Adiciona declaração para evitar erro de tipagem
 declare module "nodemailer";
 import nodemailer from "nodemailer";

@@ -1,3 +1,4 @@
+
 export default function CookiesPage() {
   return (
     <main className="max-w-2xl mx-auto py-16 px-4">

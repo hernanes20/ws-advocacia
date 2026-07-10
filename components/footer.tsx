@@ -129,6 +129,11 @@ export default function Footer() {
                   <Mail className="h-5 w-5 text-blue-400" />
                   <p className="text-slate-300">ws.advocacia1@outlook.com</p>
                 </div>
+
+                <div className="flex items-center space-x-3">
+                  <Mail className="h-5 w-5 text-blue-400" />
+                  <p className="text-slate-300">adv.williamssilva@gmail.com</p>
+                </div>
               </div>
             </div>
           </div>

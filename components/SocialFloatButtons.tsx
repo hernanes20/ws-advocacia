@@ -15,7 +15,7 @@ export default function SocialFloatButtons() {
     {
       name: "Instagram",
       icon: Instagram,
-      href: "https://instagram.com",
+      href: "https://www.instagram.com/williamssilva.adv/",
       bgColor: "bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#dc2743]",
       hoverColor: "hover:opacity-80",
       ariaLabel: "Siga-nos no Instagram",

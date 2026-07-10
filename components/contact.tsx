@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+
 import { MapPin, Phone, Mail, Send, CheckCircle, Clock, ArrowRight } from "lucide-react"
 import ScrollReveal from "@/components/ScrollReveal"
 
@@ -53,6 +54,7 @@ export default function Contact() {
     }))
   }
 
+
   const contactInfo = [
     {
       icon: Phone,
@@ -62,7 +64,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: "E-mail",
-      items: ["ws.advocacia1@outlook.com"],
+      items: ["ws.advocacia1@outlook.com", "adv.williamssilva@gmail.com"],
     },
     {
       icon: Clock,
@@ -83,7 +85,7 @@ export default function Contact() {
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Pronto para Ajudar</h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Entre em contato conosco para agendar uma consulta gratuita. Estamos disponíveis para discutir suas necessidades jurídicas.
+              Entre em contato conosco para agendar uma consulta. Estamos disponíveis para discutir suas necessidades jurídicas.
             </p>
           </div>
 
@@ -147,6 +149,7 @@ export default function Contact() {
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
+
                           <label htmlFor="name" className="block text-sm font-medium text-slate-200 mb-2">
                             Nome Completo *
                           </label>
@@ -158,6 +161,7 @@ export default function Contact() {
                             value={formData.name}
                             onChange={handleChange}
                             placeholder="Seu nome completo"
+
                             className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 focus:ring-blue-500"
                           />
                         </div>
@@ -173,6 +177,7 @@ export default function Contact() {
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="seu@email.com"
+
                             className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 focus:ring-blue-500"
                           />
                         </div>
@@ -190,6 +195,7 @@ export default function Contact() {
                             value={formData.phone}
                             onChange={handleChange}
                             placeholder="(55) 99999-9999"
+
                             className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 focus:ring-blue-500"
                           />
                         </div>
@@ -205,6 +211,7 @@ export default function Contact() {
                             value={formData.subject}
                             onChange={handleChange}
                             placeholder="Assunto da consulta"
+
                             className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 focus:ring-blue-500"
                           />
                         </div>
@@ -222,6 +229,7 @@ export default function Contact() {
                           value={formData.message}
                           onChange={handleChange}
                           placeholder="Descreva sua situação ou dúvida jurídica..."
+
                           className="bg-slate-700/50 border-slate-600 text-white placeholder:text-slate-400 focus:border-blue-500 focus:ring-blue-500"
                         />
                       </div>

@@ -50,6 +50,7 @@ export default function Hero() {
           </div>
 
           <div className="relative">
+
             <div className="relative overflow-hidden rounded-lg">
               <img
                 src="/fotowill.jpeg"
@@ -66,10 +67,7 @@ export default function Hero() {
                 }}
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-blue-600 text-white p-6 rounded-lg shadow-xl">
-              <div className="text-2xl font-bold">100%</div>
-              <div className="text-sm">Taxa de Sucesso</div>
-            </div>
+
           </div>
         </div>
       </div>
